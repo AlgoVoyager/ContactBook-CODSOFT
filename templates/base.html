@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %}{% endblock %} | Contact Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+       .visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+    </style>
+</head>
+<body class="bg-blue-100 ">
+
+{% block body %}
+{% endblock %}
+
+<script>
+
+    document.getElementById('openWindow').addEventListener('click', function() {
+    var slidingWindow = document.getElementById('slidingWindow');
+    slidingWindow.classList.remove('hidden');
+    slidingWindow.classList.add('visible');
+});
+
+document.getElementById('closeWindow').addEventListener('click', function() {
+    var slidingWindow = document.getElementById('slidingWindow');
+    slidingWindow.classList.remove('visible');
+    slidingWindow.classList.add('hidden');
+});
+
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+    var input = event.target;
+    var reader = new FileReader();
+
+    reader.onload = function(){
+        var dataURL = reader.result;
+        var imagePreview = document.getElementById('imagePreview');
+        imagePreview.src = dataURL;
+        imagePreview.style.display = 'block';
+    };
+
+    reader.readAsDataURL(input.files[0]);
+});
+
+    {% block scripts %}
+    {% endblock %}
+</script>
+</body>
+</html>

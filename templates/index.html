@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Home {% endblock %}
+{% block body %}
+
+
+<div class="text-cyan-900 grid grid-cols-5 grid-rows-9 gap-3 h-screen w-[70%] mx-auto p-2">
+    <div class="col-span-5 bg-indigo-50 shadow-md rounded-2xl flex items-center justify-center">
+
+    </div>
+    <div class="row-span-8 row-start-2 bg-indigo-50 shadow-md rounded-2xl flex items-center justify-center">2</div>
+    <div class="col-span-4 row-span-2 row-start-2 bg-indigo-50  shadow-md rounded-2xl flex items-center justify-evenly">
+        <div id="openWindow" class="w-[30%] h-[70%] bg-blue-300 hover:bg-blue-200  shadow-md rounded-2xl flex items-center justify-center font-bold text-3xl">Add Contact</div>
+        <div class="w-[30%] h-[70%] bg-orange-200 hover:bg-orange-100  shadow-md rounded-2xl flex items-center justify-center relative"><span class="absolute top-2 text-xl">Total Contacts</span><span class="font-bold text-5xl">10</span></div>
+        <div class="w-[30%] h-[70%] bg-red-300 hover:bg-red-200 shadow-md rounded-2xl flex items-center justify-center relative"><span class="absolute top-2 text-xl">Favorite Contacts</span><span class="font-bold text-5xl">5</span></div>
+    </div>
+    <div class="col-span-4 col-start-2 row-start-4 bg-indigo-50 shadow-md rounded-2xl flex items-center justify-center">4</div>
+    <div class=" p-3 col-span-4 row-span-5 col-start-2 row-start-5 bg-indigo-50  shadow-md rounded-2xl overflow-auto">
+        <table class="w-full  text-2xl">
+            {% for contact in contacts %}
+                <tr class="flex justify-between px-3 py-3 my-3 bg-blue-100 shadow-sm rounded-2xl">
+                    <td class=" min-w-[50%] font-bold">{{contact.name}}</td>
+                    <td class=" min-w-[30%] ">{{contact.phone}}</td>
+                    <td class=" min-w-[20%]  text-right text-3xl text-pink-400">
+                        {% if contact.fav %}
+                        ♥
+                        {% else %}
+                        ♡
+                        {% endif %}
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div id="slidingWindow"  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-[10px] min-w-[50vw] min-h-[50vh] rounded-3xl shadow-2xl hidden transition-transform duration-500 transform">
+<form method="post" action="/" enctype="multipart/form-data" class="flex  gap-3 p-4 rounded-3xl h-full absolute w-full">
+    {% csrf_token %}
+    <div class=" w-[40%] min-h-full flex flex-col items-center justify-center">
+        <img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width:100%;max-height:80%">
+        <label>Profile Pic</label>
+        <input class="cursor-pointer" type="file" name="ppic" id="imageInput" accept="images/*">
+    </div>
+
+   <table class=" w-[60%] min-h-full text-2xl">
+       <tr>
+           <td>Name:</td>
+           <td><input required type="text" name="name" class="w-11/12 p-2 rounded-xl shadow bg-blue-50"></td>
+       </tr>
+       <tr>
+           <td>Phone:</td>
+           <td><input required type="text" name="phone" class="w-11/12 p-2 rounded-xl shadow bg-blue-50"></td>
+       </tr>
+       <tr>
+           <td>Email:</td>
+           <td><input type="text" name="email" class="w-11/12 p-2 rounded-xl shadow bg-blue-50"></td>
+       </tr>
+       <tr>
+           <td>Address: </td>
+           <td><textarea name="addr" cols="30" rows="2" class=" p-2 rounded-xl shadow bg-blue-50"></textarea></td>
+       </tr>
+       <tr>
+           <td>Favorite</td>
+           <td><input type="checkbox" name="fav" class="shadow bg-blue-50 "></td>
+       </tr>
+       <tr>
+           <td colspan="2" class="text-center">
+               <input class="rounded-lg bg-yellow-200 p-2 cursor-pointer" type="reset" value="Clear">
+               <input class="rounded-lg bg-blue-300 p-2 cursor-pointer" type="submit" value="ADD Contact">
+               <span id="closeWindow" class="rounded-lg bg-red-200 p-2 cursor-pointer">Cancel</span>
+           </td>
+       </tr>
+
+   </table>
+</form>
+</div>
+
+{% endblock %}
