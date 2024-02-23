@@ -1,0 +1,35 @@
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+}
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.preview_img{
+    border-radius:30%;
+    scale:130%;
+    max-width:25px;
+    max-height:25px;
+
+}
+#imagePreview{
+border-radius:10%;
+opacity:0.5
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+  ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+  ::-webkit-scrollbar-thumb {
+  background: #93C5FD;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+
+  background:#F87171;
+}
